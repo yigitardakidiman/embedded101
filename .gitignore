@@ -1,0 +1,38 @@
+# Compiled Object files, Executables, Libraries
+*.o
+*.obj
+*.so
+*.a
+*.lib
+*.exe
+*.out
+*.app
+*.i*86
+*.x86_64
+*.hex
+*.bin
+*.elf
+*.d
+*.map
+
+# Build directories
+build/
+bin/
+obj/
+Debug/
+Release/
+
+# IDE and Editor configurations
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+.idea/
+*.swp
+*.swo
+*~
+
+# Operating System specific
+.DS_Store
+Thumbs.db
+desktop.ini
