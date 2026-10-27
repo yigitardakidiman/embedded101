@@ -1,47 +1,42 @@
-# Embedded 101 - Gömülü Sistemler ve Yazılım Temelleri
+# Gömülü Yazılım ve Donanım Temelleri (Embedded 101)
 
-Bu depo, sıfırdan elektrik-elektronik ve gömülü yazılım temellerini öğrenmek, mikrodenetleyici mimarilerini derinlemesine kavramak ve sektörel mühendislik pratikleri kazanmak amacıyla oluşturulmuştur.
+Bu depo; elektrik-elektronik ve programlama temellerinden başlayarak donanıma yakın, güvenli ve verimli gömülü yazılım geliştirme sürecini adım adım belgeleyen kapsamlı bir eğitim arşividir.
 
-Öğrenme süreci ve eğitmen çalışma ilkeleri [agent.md](agent.md) dosyasında tanımlanan pedagojik standartlara göre yürütülmektedir.
+Eğitim ilkeleri ve pedagojik kurallar [agent.md](agent.md) dosyasında tanımlanmıştır.
 
 ---
 
-## 🎯 Müfredat ve Yol Haritası
+## 📌 Müfredat ve Ders Notları
 
-- [x] **1. Bit, Byte ve Sayı Sistemleri**
-  - Binary, Decimal, Hexadecimal tabanlar ve dönüşümler
-  - Bit manipülasyonu (`AND`, `OR`, `XOR`, `NOT`, bit kaydırma `<<`, `>>`)
-  - Register seviyesinde bit set/clear/toggle uygulamaları
-- [x] **2. Lojik Kapılar**
-  - AND, OR, NOT, XOR kapıları ve doğruluk tabloları
-  - Aktif-Düşük (Active-LOW) ve donanımsal mantık
-- [ ] **3. Elektriksel Sinyaller** *(Devam Ediyor)*
-  - HIGH/LOW seviyeleri, floating durumları ve gerilim eşikleri
-  - Yükselen (Rising) ve düşen (Falling) kenar tetikleme
-  - Kare dalga, sinüs, periyot ($T$) ve frekans ($f$)
-  - PWM (Pulse Width Modulation), Duty Cycle ve ortalama gerilim
-  - STEP sinyalleri ve motor kontrol temelleri
-- [ ] **4. Programlama Temelleri**
-  - Değişkenler, veri tipleri, değişken isimlendirme, atama işlemleri
-  - Kontrol yapıları (`if-else`, `switch-case`)
-  - Döngüler (`for`, `while`)
-  - Fonksiyonlar ve diziler
-- [ ] **5. Algoritma Kurma**
-  - Problem analizi, adım adım çözüm geliştirme
-  - Akış diyagramları ve sözde kod (pseudocode) oluşturma
-- [ ] **6. Geliştirme Ortamları ve İşletim Sistemleri**
-  - IDE, VS Code, derleyici zinciri (toolchain)
-  - Linux, Ubuntu ve gömülü geliştirme ortamları
-- [ ] **7. Mikrodenetleyici Mimarisi**
-  - MCU, CPU, RAM, Flash bellek organizasyonu
-  - GPIO yapısı, donanımsal yazmaçlar (registers) ve firmware kavramı
-- [ ] **8. Haberleşme Protokolleri**
-  - UART, I2C ve SPI haberleşmelerinin donanımsal mimarisi, farkları ve paket yapıları
-- [ ] **9. Pointer ve Struct**
-  - Bellek adresleri, işaretçi mantığı (`*`, `&`), struct yapıları ve bellek haritalama
-- [ ] **10. Interrupt (Kesme)**
-  - Kesme mantığı, Polling ile farkı, Kesme Servis Rutinleri (ISR) ve önceliklendirme
-- [ ] **11. Timer ve Zamanlama**
-  - Donanımsal sayaçlar (Timers), bloklayan (`delay`) ve bloklamayan (`millis`/zamanlayıcı tabanlı) kod mimarisi
-- [ ] **12. Debug ve Datasheet Okuma**
-  - Datasheet ve referans kılavuzu okuma, register haritaları, Serial debug ve breakpoint kullanımı
+Her konu; detaylı teorik anlatımını, donanımsal mikrodenetleyici karşılıklarını ve derste gerçekleştirilen tüm **interaktif soru-cevap / hata analizi kayıtlarını** içeren müstakil bir dokümana sahiptir:
+
+| # | Konu Başlığı | Durum | Ders Notu & Soru-Cevaplar |
+|:---:|---|:---:|:---:|
+| **1** | **Bit, Byte ve Sayı Sistemleri** | Tamamlandı | [01_bit_byte_sayi_sistemleri.md](notes/01_bit_byte_sayi_sistemleri.md) |
+| **2** | **Lojik Kapılar** | Tamamlandı | [02_lojik_kapilar.md](notes/02_lojik_kapilar.md) |
+| **3** | **Elektriksel Sinyaller** | Tamamlandı | [03_elektriksel_sinyaller.md](notes/03_elektriksel_sinyaller.md) |
+| **4** | **Programlama Temelleri (Gömülü C)** | Tamamlandı | [04_programlama_temelleri.md](notes/04_programlama_temelleri.md) |
+| **5** | **Algoritma Kurma** | Tamamlandı | [05_algoritma_kurma.md](notes/05_algoritma_kurma.md) |
+| **6** | **Geliştirme Ortamları ve İşletim Sistemleri** | Tamamlandı | [06_gelistirme_ortamlari.md](notes/06_gelistirme_ortamlari.md) |
+| **7** | **Mikrodenetleyici Mimarisi** | Tamamlandı | [07_mikrodenetleyici_mimarisi.md](notes/07_mikrodenetleyici_mimarisi.md) |
+| **8** | **Haberleşme Protokolleri (UART, I2C, SPI)** | *Devam Ediyor* | `notes/08_haberlesme_protokolleri.md` |
+| **9** | **Pointer ve Struct** | Beklemede | `notes/09_pointer_ve_struct.md` |
+| **10** | **Interrupt (Kesme)** | Beklemede | `notes/10_interrupt_kesme.md` |
+| **11** | **Timer ve Zamanlama** | Beklemede | `notes/11_timer_ve_zamanlama.md` |
+| **12** | **Debug ve Datasheet Okuma** | Beklemede | `notes/12_debug_ve_datasheet.md` |
+
+---
+
+## 🗂️ Dizin Yapısı
+
+```text
+embedded101/
+├── agent.md                          # Eğitmen kuralları ve eğitim metodolojisi
+├── README.md                         # Ana gösterge paneli ve müfredat haritası
+└── notes/                            # Konu bazlı modüler ders notları ve soru-cevaplar
+    ├── 01_bit_byte_sayi_sistemleri.md
+    ├── 02_lojik_kapilar.md
+    ├── 03_elektriksel_sinyaller.md
+    ├── 04_programlama_temelleri.md
+    └── ... (ilerledikçe eklenecekler)
+```
