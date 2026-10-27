@@ -37,3 +37,43 @@ Mikrodenetleyiciler sadece $0$ ve $1$'lerden oluşan **Makine Kodunu (Binary)** 
 > 2) Bir otomobilde ABS Fren Sistemi ile Navigasyon ekranında sırasıyla Gömülü Linux mu yoksa Bare-Metal MCU mu kullanılır? Neden?  
 > **Öğrenci Cevabı:** 1) Linux bir kernel'dir (çekirdektir). Ubuntu ise Linux tabanlı bir dağıtımdır. 2) Navigasyonda Gömülü Linux, ABS'de Bare-Metal MCU kullanılır.  
 > **Değerlendirme:** Doğru. ABS'de gecikmeye (jitter) tahammül yoktur; gerçek zamanlı (real-time) kesin determinizm şarttır.
+
+---
+
+## 6.3 Sektörde Kullanılan Popüler Gömülü IDE'ler ve Araçlar
+
+Gömülü sistemler endüstrisinde kullanılan IDE'ler iki ana kategoriye ayrılır:
+
+### 1. Üreticiye Özel (Vendor-Specific) ve Endüstri Standardı IDE'ler
+
+| IDE Adı | Geliştirici | Hedef Çipler | Öne Çıkan Özellikleri |
+|---|---|---|---|
+| **STM32CubeIDE** | STMicroelectronics | STM32 (ARM Cortex-M) | Ücretsizdir. Dahili **STM32CubeMX** aracıyla pin ve clock ayarlarını grafiksel olarak yapıp C kodu üretir. GCC derleyicisi kullanır. |
+| **Keil MDK-ARM (µVision)** | Arm / Keil | Neredeyse tüm ARM çipleri | Savunma sanayii ve otomotivde uzun yıllardır altın standarttır. Gelişmiş simülatörü ve register seviyesinde hızlı debugger'ı vardır. Lisanslıdır (32 KB kod limiti olan ücretsiz demo sürümü bulunur). |
+| **IAR Embedded Workbench** | IAR Systems | ARM, MSP430, AVR, Renesas, RISC-V | Dünyanın en gelişmiş kod optimizasyonu (en küçük kod boyutu ve en yüksek hız) sunan tescilli C/C++ derleyicisine sahiptir. Medikal, havacılık ve otomotiv güvenlik standartları (MISRA-C, ISO 26262) projelerinde sıkça tercih edilir. Ücretlidir. |
+| **MPLAB X IDE** | Microchip | PIC, dsPIC, AVR (ATmega, ATtiny) | NetBeans tabanlıdır. Microchip ve Atmel çiplerini kodlamak için resmi ortamdır. XC8, XC16, XC32 derleyicileri ile kullanılır. |
+| **Code Composer Studio (CCS)** | Texas Instruments | MSP430, C2000, Sitara | TI'ın özellikle motor kontrolü ve dijital güç elektroniğinde lider C2000 DSP/MCU serisi için Eclipse tabanlı resmi geliştirme ortamıdır. |
+| **ESP-IDF / Espressif IDE** | Espressif | ESP32, ESP8266 | Nesnelerin İnterneti (IoT), Wi-Fi ve Bluetooth tabanlı projelerde yaygın ESP32 ailesinin resmi geliştirme ortamıdır. FreeRTOS tabanlıdır. |
+
+---
+
+### 2. Modern ve Çoklu Platform (Cross-Platform) Ortamlar
+
+- **VS Code + PlatformIO (Sektörün Yeni Trendi):**
+  - VS Code'a yüklenen **PlatformIO** eklentisi, farklı çip üreticilerinin (STM32, ESP32, AVR, NRF52 vb.) kütüphanelerini, derleyicilerini ve yükleyicilerini tek bir çatı altında toplar.
+  - Proje konfigürasyonunu `platformio.ini` dosyasında tutarak ekip çalışmasını ve Git sürüm kontrolünü inanılmaz kolaylaştırır.
+- **VS Code + Cortex-Debug:**
+  - `arm-none-eabi-gcc`, `CMake` ve `OpenOCD` gibi açık kaynaklı araç zincirlerini kullanarak tamamen özelleştirilmiş profesyonel bir ARM geliştirme ortamı kurmayı sağlar.
+- **Arduino IDE:**
+  - Öğrenmesi ve prototip geliştirmesi çok hızlıdır. Ancak arka planda donanımı aşırı soyutladığı, register kontrolünü gizlediği ve profesyonel donanımsal hata ayıklama (hardware debugging / breakpoint) yetenekleri zayıf olduğu için ticari ürün geliştirmede tercih edilmez.
+
+---
+
+### 3. Donanımsal Hata Ayıklayıcılar (Hardware Debuggers / Probes)
+
+Kodun mikrodenetleyiciye yüklenmesini (Flash) ve çalışırken adım adım izlenmesini (Breakpoint, Register okuma) sağlayan fiziksel ara donanımlardır:
+- **ST-Link (ST):** STM32 geliştirme kartlarının üzerinde entegre gelen resmi programlayıcı.
+- **J-Link (Segger):** Dünya çapında endüstri standardı olan, son derece hızlı ve neredeyse tüm mikrodenetleyici ailelerini destekleyen profesyonel hata ayıklayıcı.
+- **DAPLink / CMSIS-DAP:** ARM'ın açık kaynaklı standart debug donanımı.
+- **PICkit:** Microchip PIC/AVR mikrodenetleyicileri için donanımsal programlayıcı.
+
