@@ -9,8 +9,11 @@ Bu doküman, mikrodenetleyicilerin işlemci (CPU) ve Aritmetik Mantık Biriminin
 - Lojik kapılar, transistörlerin bir araya gelmesiyle mantıksal kararlar üreten dijital devre elemanlarıdır.
 - **AND Kapısı:** Mantıksal çarpma işlemidir ($Y = A \cdot B$).
   - Çıkışın HIGH ($1$) olabilmesi için **tüm girişlerin HIGH ($1$) olması şarttır**.
+- **C Dilindeki Sembolleri:**
+  - **Bit Düzeyinde (Bitwise) AND (`&`):** İki sayının karşılıklı bitlerini AND kapısından geçirir (`Y = A & B;`). Register'larda bit sıfırlama (maskeleme) için kullanılır.
+  - **Mantıksal (Koşul) AND (`&&`):** `if` / `while` karar yapılarında iki koşulun aynı anda doğru olmasını denetler (`if (kapak_kapali && buton_basili)`).
 
-| Giriş A | Giriş B | Çıkış Y |
+| Giriş A | Giriş B | Çıkış Y (`A & B`) |
 |:---:|:---:|:---:|
 | 0 | 0 | 0 |
 | 0 | 1 | 0 |
@@ -31,8 +34,11 @@ Bu doküman, mikrodenetleyicilerin işlemci (CPU) ve Aritmetik Mantık Biriminin
 - Mantıksal toplama işlemidir ($Y = A + B$).
 - Girişlerden **en az biri HIGH ($1$)** olduğunda çıkış HIGH ($1$) olur.
 - Çıkışın LOW ($0$) olabilmesi için tüm girişlerin aynı anda LOW ($0$) olması gerekir.
+- **C Dilindeki Sembolleri:**
+  - **Bit Düzeyinde (Bitwise) OR (`|`):** İki sayının karşılıklı bitlerini OR kapısından geçirir (`Y = A | B;`). Register'larda belirli bir biti $1$ yapmak (Set) için kullanılır.
+  - **Mantıksal (Koşul) OR (`||`):** Karar yapılarında koşullardan en az birinin doğru olmasını denetler (`if (yangin_sensoru || manuel_buton)`).
 
-| Giriş A | Giriş B | Çıkış Y |
+| Giriş A | Giriş B | Çıkış Y (`A \| B`) |
 |:---:|:---:|:---:|
 | 0 | 0 | **0** |
 | 0 | 1 | 1 |
@@ -52,8 +58,11 @@ Bu doküman, mikrodenetleyicilerin işlemci (CPU) ve Aritmetik Mantık Biriminin
 
 - Tek girişli ve tek çıkışlıdır ($Y = \overline{A}$).
 - Girişi tersler: $0 \rightarrow 1$, $1 \rightarrow 0$.
+- **C Dilindeki Sembolleri:**
+  - **Bit Düzeyinde (Bitwise) NOT (`~`):** Bir verinin tüm bitlerini tek tek tersler (`Y = ~A;`). Örneğin `~0b00001111` $\rightarrow$ `0b11110000`.
+  - **Mantıksal (Koşul) NOT (`!`):** Bir koşulun doğruluk değerini tersler (`if (!buton_basili)` $\rightarrow$ `0` ise `1`, sıfırdan farklıysa `0` yapar).
 
-| Giriş A | Çıkış Y |
+| Giriş A | Çıkış Y (`~A` / `!A`) |
 |:---:|:---:|
 | 0 | **1** |
 | 1 | **0** |
@@ -71,8 +80,11 @@ Bu doküman, mikrodenetleyicilerin işlemci (CPU) ve Aritmetik Mantık Biriminin
 ## 2.4 XOR (Özel VEYA / Exclusive-OR) Kapısı
 
 - Girişler birbirinden **farklıysa $1$**, **aynıysa $0$** üretir ($Y = A \oplus B$).
+- **C Dilindeki Sembolleri:**
+  - **Bit Düzeyinde (Bitwise) XOR (`^`):** Karşılıklı bitler farklıysa `1`, aynıysa `0` üretir (`Y = A ^ B;`). Gömülü sistemlerde pin durumunu terslemek (Toggle: `PORTB ^= (1 << 5);`) için kullanılır.
+  - **Mantıksal (Koşul) Karşılığı (`!=`):** C dilinde `^^` şeklinde ayrı bir mantıksal XOR operatörü yoktur; iki boolean (0/1) koşulun birbirinden farklı olup olmadığı `!=` (eşit değildir) ile kontrol edilir.
 
-| Giriş A | Giriş B | Çıkış Y |
+| Giriş A | Giriş B | Çıkış Y (`A ^ B`) |
 |:---:|:---:|:---:|
 | 0 | 0 | 0 |
 | 0 | 1 | **1** |
@@ -93,3 +105,16 @@ Bu doküman, mikrodenetleyicilerin işlemci (CPU) ve Aritmetik Mantık Biriminin
 > **Rehberlik / Hata Analizi:** 1 ve 2 doğruydu ($0 \rightarrow 1$ ve $1 \rightarrow 0$). Ancak giriş değerinin tam tersine döndüğü hatırlatıldı. 0'ı 1, 1'i 0 yapan kapı soruldu.  
 > **Öğrenci Düzeltmesi:** **NOT kapısı gibi davranır.**  
 > **Değerlendirme:** Doğru. (Bir bacağı $1$'e bağlanırsa NOT / Evirici; $0$'a bağlanırsa Buffer / Aynısını geçiren kapı olur).
+
+---
+
+## 2.5 Lojik Kapıların C Dilindeki Sembolleri (Özet Tablo)
+
+Gömülü C'de lojik kapılar iki farklı seviyede kullanılır: **Bit Düzeyinde (Bitwise)** operatörler doğrudan register bitlerini değiştirmek için, **Mantıksal (Logical)** operatörler ise `if` / `while` içinde karar vermek için kullanılır.
+
+| Lojik Kapı | Matematiksel Gösterim | C Bit Düzeyi (Bitwise) | C Mantıksal (Koşul) | Gömülü C Kullanım Örneği |
+|---|:---:|:---:|:---:|---|
+| **AND (VE)** | $Y = A \cdot B$ | **`&`** | **`&&`** | `PORTA &= ~(1 << 3);` *(Bit sıfırlama)* / `if (a && b)` |
+| **OR (VEYA)** | $Y = A + B$ | **`\|`** | **`\|\|`** | `PORTA \|= (1 << 3);` *(Bit 1 yapma)* / `if (a \|\| b)` |
+| **NOT (DEĞİL)** | $Y = \overline{A}$ | **`~`** | **`!`** | `maske = ~0x01;` *(Bitleri tersle)* / `if (!hazir)` |
+| **XOR (Özel VEYA)** | $Y = A \oplus B$ | **`^`** | **`!=`** *(0/1 için)* | `PORTA ^= (1 << 3);` *(Pin durumu değiştirme / Toggle)* |
